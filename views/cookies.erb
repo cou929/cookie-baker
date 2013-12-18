@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Cookies</h1>
+
+  <table border="1">
+
+    <tr>
+      <th>key</th>
+      <th>length</th>
+      <th>value</th>
+    </tr>
+
+    <% @cookies.each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= (key + '=' + value).length  %></td>
+      <td><%= value %></td>
+    </tr>
+    <% end %>
+
+    <tr>
+      <th>Total</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td><%= @cookies.length %></td>
+      <td><%= @cookies.reduce(0) {|memo, (k, v)| memo += (k + '=' + v).length} %></td>
+      <td></td>
+    </tr>
+
+  </table>
+</body>
+</html>

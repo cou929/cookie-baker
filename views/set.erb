@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Set-Cookie</h1>
+
+  <table border="1">
+
+    <tr>
+      <th>key</th>
+      <th>length</th>
+      <th>value</th>
+    </tr>
+
+    <% @set_cookies.each do |cook| %>
+    <tr>
+      <td><%= cook['key'] %></td>
+      <td><%= (cook['key'] + '=' + cook['value']).length  %></td>
+      <td><%= cook['value'] %></td>
+    </tr>
+    <% end %>
+
+  </table>
+</body>
+</html>
