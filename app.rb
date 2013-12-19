@@ -13,7 +13,7 @@ get %r{/set(?:\.([a-z]+))?} do |format|
     next if value_len.to_i > 100000
     value = ''
     value_len.to_i.times{value  << (65 + rand(25)).chr}
-    response.set_cookie(key, value)
+    response.set_cookie(key, {:value => value, :expires => Time.new(Time.new().year + 1, 1, 1)})
     @set_cookies.push({'key' => key, 'value' => value})
   end
   if format == 'gif'
