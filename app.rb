@@ -5,9 +5,10 @@ get '/' do
   erb :cookies
 end
 
-get '/set' do
+get %r{/set(?:\.([a-z]+))?} do |format|
   @set_cookies = []
   params.each do |key, value_len|
+    next if value_len.is_a? Enumerable
     next if value_len.to_i == 0
     next if value_len.to_i > 100000
     value = ''
@@ -15,7 +16,12 @@ get '/set' do
     response.set_cookie(key, value)
     @set_cookies.push({'key' => key, 'value' => value})
   end
-  erb :set
+  if format == 'gif'
+    content_type 'image/gif'
+    "GIF89a\1\0\1\0%c\0\0%c%c%c\0\0\0,\0\0\0\0\1\0\1\0\0%c%c%c\1\0;" % [144, 153, 0, 0, 2, 2, 4]
+  else
+    erb :set
+  end
 end
 
 get '/clear' do
