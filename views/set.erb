@@ -19,6 +19,12 @@
     </tr>
     <% end %>
 
+    <div id="cookie" style="display:none">
+    <% @set_cookies.each do |cook| %>
+    <div class="cookies"><%= cook['key'] + '=' + cook['value'] %></div>
+    <% end %>
+    </div>
+
   </table>
 </body>
 </html>
